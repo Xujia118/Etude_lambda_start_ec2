@@ -39,10 +39,10 @@ resource "aws_lambda_function" "start_ec2_lambda" {
   }
 }
 
-# CloudWatch Event Rule to Trigger Lambda on Schedule
+# EventBridge Rule to Trigger Lambda on Schedule
 resource "aws_cloudwatch_event_rule" "lambda_schedule" {
   name                = "lambda_start_schedule_rule"
-  schedule_expression = "cron(0 16 ? * 2-6 *)" 
+  schedule_expression = "cron(0 0 ? * 2-6 *)"  # UTC time
 }
 
 resource "aws_cloudwatch_event_target" "lambda_target" {
